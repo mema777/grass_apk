@@ -49,7 +49,7 @@ def spustit_funkci_v_nahodnych_intervalech():
         if je_povoleny_cas():
 
             # Vygeneruj náhodný časový interval (40 až 100 minut)
-            dalsi_cas_minuty = random.uniform(45.0, 83.0)
+            dalsi_cas_minuty = random.uniform(45.0, 93.0)
             print(f"Další volání bude za {dalsi_cas_minuty} minut.")
             # Uspi skript na daný počet minut
             time.sleep(dalsi_cas_minuty * 60)
