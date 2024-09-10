@@ -1,26 +1,26 @@
 import time
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 import pyautogui
+import pyperclip
+
 # Funkce, kterou chceš volat opakovaně
 def moje_funkce():
     print("Funkce !work byla zavolána v", datetime.now())
     pyautogui.moveTo(1678, 475, duration=0.3)
     pyautogui.doubleClick()
-    pyautogui.typewrite("!work")
-
-
-
+    # Používá clipboard pro vložení textu
+    pyperclip.copy("!work")
+    pyautogui.hotkey('ctrl', 'v')  # Používá Ctrl + V pro vložení textu
 
 # Funkce, která se má volat jednou denně při vstupu do povoleného času
 def daily():
     print("Funkce !daily byla zavolána v", datetime.now())
     pyautogui.moveTo(1678, 475, duration=0.3)
     pyautogui.click()
-    pyautogui.typewrite("!daily")
-
-
-
+    # Používá clipboard pro vložení textu
+    pyperclip.copy("!daily")
+    pyautogui.hotkey('ctrl', 'v')  # Používá Ctrl + V pro vložení textu
 
 # Funkce, která se volá, když je časový interval menší než 61 minut
 def znovu():
@@ -31,24 +31,20 @@ def znovu():
 # Kontroluj, zda je aktuální čas v povoleném rozmezí
 def je_povoleny_cas():
     nyni = datetime.now().time()
-
     start_cas = datetime.strptime("08:00", "%H:%M").time()
     konec_cas = datetime.strptime("02:00", "%H:%M").time()
 
-    if nyni >= start_cas or nyni <= konec_cas:
+    if start_cas <= nyni <= konec_cas or (start_cas > konec_cas and (nyni >= start_cas or nyni <= konec_cas)):
         return True
     return False
 
 # Hlavní smyčka
-
-
 def spustit_funkci_v_nahodnych_intervalech():
     daily_called = False  # Sleduj, zda byla funkce daily() zavolána
     while True:
         # Zkontroluj, zda je aktuální čas povolený
         if je_povoleny_cas():
-
-            # Vygeneruj náhodný časový interval (40 až 100 minut)
+            # Vygeneruj náhodný časový interval (45 až 93 minut)
             dalsi_cas_minuty = random.uniform(45.0, 93.0)
             print(f"Další volání bude za {dalsi_cas_minuty} minut.")
             # Uspi skript na daný počet minut
@@ -58,19 +54,15 @@ def spustit_funkci_v_nahodnych_intervalech():
                 daily()
                 daily_called = True  # Nastav příznak, že daily() byla zavolána
 
-
             # Zavolej hlavní funkci
             moje_funkce()
 
             # Pokud je interval menší než 61 minut, zavolej funkci znovu()
             if dalsi_cas_minuty < 61:
                 znovu()
-
-
         else:
             # Pokud je mimo časové okno, resetuj příznak daily()
             daily_called = False
-
             # Pokud je mimo časové okno, počkej 10 minut a zkontroluj znovu
             print("Mimo povolený čas, čekám 10 minut.")
             time.sleep(10 * 60)
