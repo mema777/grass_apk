@@ -25,7 +25,7 @@ def daily():
 # Funkce, která se volá, když je časový interval menší než 61 minut
 def znovu():
     print("Funkce znovu() byla zavolána, protože interval byl menší než 61 minut.")
-    time.sleep(random.uniform(21.0, 45.0) * 60)
+    time.sleep(random.uniform(17.0, 30.0) * 60)
     moje_funkce()
 
 # Kontroluj, zda je aktuální čas v povoleném rozmezí
@@ -49,7 +49,7 @@ def spustit_funkci_v_nahodnych_intervalech():
         if je_povoleny_cas():
 
             # Vygeneruj náhodný časový interval (40 až 100 minut)
-            dalsi_cas_minuty = random.uniform(40.0, 100.0)
+            dalsi_cas_minuty = random.uniform(45.0, 83.0)
             print(f"Další volání bude za {dalsi_cas_minuty} minut.")
             # Uspi skript na daný počet minut
             time.sleep(dalsi_cas_minuty * 60)
