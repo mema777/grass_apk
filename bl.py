@@ -21,7 +21,7 @@ while running:
     pyautogui.press('f5')
 
     # Čekání náhodný počet sekund mezi 5.0 a 9.0
-    wait_time = random.uniform(5.0, 9.0)
+    wait_time = random.uniform(3.3, 7.4)
     time.sleep(wait_time)
 
 print("Program ukončen.")
